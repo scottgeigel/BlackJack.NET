@@ -10,7 +10,6 @@ namespace BlackJack.NET
     {
         private static Dictionary<Face, int> lookup = new Dictionary<Face, int>
         {
-            {Face.One, 1 },
             {Face.Two, 2 },
             {Face.Three, 3 },
             {Face.Four, 4 },

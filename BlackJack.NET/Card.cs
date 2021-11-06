@@ -16,7 +16,6 @@ namespace BlackJack.NET
 
     public enum Face
     {
-        One,
         Two,
         Three,
         Four,
@@ -36,5 +35,25 @@ namespace BlackJack.NET
     {
         public Suite Suite { get; set; }
         public Face Face { get; set; }
+
+        public override int GetHashCode()
+        {
+            return ((int)Face << 2) + ((int)Suite);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Card other = obj as Card;
+            if (obj == null)
+            {
+                return false;
+            }
+            return other.Face == Face && other.Suite == Suite;
+        }
+
+        public override string ToString()
+        {
+            return $"{Face.ToString()} of {Suite.ToString()}";
+        }
     }
 }
