@@ -39,7 +39,6 @@ namespace BlackJack.NET
             cardCollection.Add(card);
         }
 
-
         public int Sum()
         {
             int sum = 0;
@@ -50,12 +49,13 @@ namespace BlackJack.NET
             {
                 sum += lookup[c.Face];
             }
-            foreach(Card c in ace)
+            foreach (Card c in ace)
             {
                 if ((sum + 11) > 21)
                 {
                     sum++;
-                } else
+                }
+                else
                 {
                     sum += 11;
                 }
