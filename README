@@ -1,0 +1,20 @@
+Supported Platforms:
+	* Windows
+	* Linux
+	* Mac OS
+
+How to Run:
+requires .NET 5. You can download the runtime at https://dotnet.microsoft.com/download/dotnet/5.0
+and run on the command line: dotnet BlackJack.NET.dll
+
+Alternatively you can download visual studio https://visualstudio.microsoft.com/
+and set it up with the .NET 5 SDK to compile and run the software.
+
+Assumptions:
+Normally the Dealer would have one card up and the other down. Though the player hits until 16 or higher. The Dealer is the only one that needs to observe the other's hand. And by that point the player has stayed/bust already.
+
+So I did not code in the concept of showing/hidden cards.
+
+
+Also typically casinos have all players play first and the dealer is the final player. So the game logic will have the player finish their hand followed by the dealer.
+
