@@ -7,8 +7,6 @@
         private readonly IPlayerStrategy strategy;
         public int Score => hand.Sum();
 
-        public bool WillStay => hand.Sum() >= StayingScore;
-
         public int StayingScore => strategy.StayingScore;
 
         public IPlayerStrategy Strategy => strategy;
