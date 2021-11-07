@@ -1,16 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJack.NET
 {
     class Stats : IGameListener
     {
-        private Stopwatch timer = new Stopwatch();
-        private Dictionary<int, int> winHistogram = new Dictionary<int, int>();
+        private readonly Stopwatch timer = new();
+        private readonly Dictionary<int, int> winHistogram = new();
         private int playerWinCount = 0;
         public int TotalGames { get; private set; } = 0;
 

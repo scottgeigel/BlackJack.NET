@@ -37,7 +37,7 @@ namespace Tests
 
     class TestGame : IGameController
     {
-        private Stack<Card> deck;
+        private readonly Stack<Card> deck;
         public TestGame(List<Card> deck)
         {
             this.deck = new Stack<Card>(deck);
@@ -59,12 +59,12 @@ namespace Tests
     public class PlayerStrategyTest
     {
         [Fact(DisplayName = "It should hit when the hand is less than 16")]
-        public void testLessThan16()
+        public void TestLessThan16()
         {
             bool functionGotCalled = false;
-            TestGame testGame = new TestGame(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } });
-            PlayerStrategy playerStrategy = new PlayerStrategy();
-            TestPlayer testPlayer = new TestPlayer()
+            TestGame testGame = new(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } });
+            PlayerStrategy playerStrategy = new();
+            TestPlayer testPlayer = new()
             {
                 ManualScore = 4,
                 TestHarnessStrategy = playerStrategy,
@@ -76,11 +76,11 @@ namespace Tests
         }
 
         [Fact(DisplayName = "It should no hit when the hand is 16")]
-        public void testEq16()
+        public void TestEq16()
         {
-            TestGame testGame = new TestGame(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } });
-            PlayerStrategy playerStrategy = new PlayerStrategy();
-            TestPlayer testPlayer = new TestPlayer()
+            TestGame testGame = new(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } });
+            PlayerStrategy playerStrategy = new();
+            TestPlayer testPlayer = new()
             {
                 ManualScore = 16,
                 TestHarnessStrategy = playerStrategy,
@@ -91,12 +91,12 @@ namespace Tests
         }
 
         [Fact(DisplayName = "Dealer should hit if score is <= than player's")]
-        public void testDealerLessThanPlayer()
+        public void TestDealerLessThanPlayer()
         {
             bool functionGotCalled = false;
-            TestGame testGame = new TestGame(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } }) { ManualScore = 16 };
-            DealerStrategy playerStrategy = new DealerStrategy();
-            TestPlayer testPlayer = new TestPlayer()
+            TestGame testGame = new(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } }) { ManualScore = 16 };
+            DealerStrategy playerStrategy = new();
+            TestPlayer testPlayer = new()
             {
                 ManualScore = 4,
                 TestHarnessStrategy = playerStrategy,
@@ -109,11 +109,11 @@ namespace Tests
         }
 
         [Fact(DisplayName = "DealerStrategy should not hit if score > player score")]
-        public void testDealerGreaterThanPlayer()
+        public void TestDealerGreaterThanPlayer()
         {
-            TestGame testGame = new TestGame(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } }) { ManualScore = 16 };
-            DealerStrategy playerStrategy = new DealerStrategy();
-            TestPlayer testPlayer = new TestPlayer()
+            TestGame testGame = new(new List<Card> { new Card { Face = Face.Two, Suite = Suite.Spade } }) { ManualScore = 16 };
+            DealerStrategy playerStrategy = new();
+            TestPlayer testPlayer = new()
             {
                 ManualScore = 19,
                 TestHarnessStrategy = playerStrategy,

@@ -4,9 +4,9 @@ namespace BlackJack.NET
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            GameController game = new GameController();
+            GameController game = new();
             game.Play();
         }
     }

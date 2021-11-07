@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJack.NET
 {
@@ -13,8 +10,8 @@ namespace BlackJack.NET
 
         public Shoe()
         {
-            Random rnd = new Random();
-            List<Card> workingCards = new List<Card>();
+            Random rnd = new();
+            List<Card> workingCards = new();
             Face[] faces = (Face[])Enum.GetValues(typeof(Face));
             Suite[] suites = (Suite[])Enum.GetValues(typeof(Suite));
 

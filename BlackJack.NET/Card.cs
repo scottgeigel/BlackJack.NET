@@ -53,7 +53,7 @@ namespace BlackJack.NET
 
         public override string ToString()
         {
-            return $"{Face.ToString()} of {Suite.ToString()}";
+            return $"{Face} of {Suite}";
         }
     }
 }

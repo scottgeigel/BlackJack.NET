@@ -11,11 +11,11 @@ namespace Tests
     public class ShoeTest
     {
         [Fact(DisplayName = "The deck comes in a random order with all 312 cards")]
-        public void shuffleCheck()
+        public void ShuffleCheck()
         {
-            Shoe shoe = new Shoe();
+            Shoe shoe = new();
             Assert.Equal(312, shoe.Count);
-            Dictionary<Card, int> tally = new Dictionary<Card, int>();
+            Dictionary<Card, int> tally = new();
             while(shoe.Count > 0)
             {
                 Card card = shoe.Next();

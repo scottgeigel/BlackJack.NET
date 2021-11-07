@@ -8,8 +8,8 @@ namespace BlackJack.NET
 
     public class Player : IPlayer, IGameListener
     {
-        private CardCollection hand = new CardCollection();
-        private IPlayerStrategy strategy;
+        private CardCollection hand = new();
+        private readonly IPlayerStrategy strategy;
         public int Score => hand.Sum();
 
         public bool WillStay => hand.Sum() >= StayingScore;

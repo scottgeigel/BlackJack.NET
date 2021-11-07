@@ -12,8 +12,8 @@ namespace BlackJack.NET
         protected IPlayer dealer = new Player(new DealerStrategy());
         protected IPlayer player = new Player(new PlayerStrategy());
         private bool stay;
-        private Shoe deck = new Shoe();
-        public List<IGameListener> gameListeners = new List<IGameListener>();
+        private readonly Shoe deck = new();
+        public List<IGameListener> gameListeners = new();
 
         public GameController()
         {
@@ -58,17 +58,12 @@ namespace BlackJack.NET
             }
         }
 
-        private void HandleEndGame()
-        {
-
-        }
-
         public void Play()
         {
             const string GAMEOVER_Push = "Result: Push";
             const string GAMEOVER_Player = "Result: Player wins!";
             const string GAMEOVER_Dealer = "Result: Dealer wins";
-            Stats stats = new Stats();
+            Stats stats = new();
             gameListeners.Add(stats);
             stats.StartTimer();
             //4 cards minimum to play, though that's a coin toss

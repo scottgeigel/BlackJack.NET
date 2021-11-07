@@ -8,7 +8,7 @@ namespace BlackJack.NET
 {
     public class CardCollection
     {
-        private static Dictionary<Face, int> lookup = new Dictionary<Face, int>
+        private static readonly Dictionary<Face, int> lookup = new()
         {
             {Face.Two, 2 },
             {Face.Three, 3 },
@@ -24,7 +24,7 @@ namespace BlackJack.NET
             {Face.King, 10 },
         };
 
-        private List<Card> cardCollection = new List<Card>();
+        private readonly List<Card> cardCollection = new();
 
         public CardCollection(List<Card> initial = null)
         {
@@ -65,7 +65,7 @@ namespace BlackJack.NET
 
         public override string ToString()
         {
-            StringBuilder sb = new StringBuilder();
+            StringBuilder sb = new();
             for(int i = 0; i < cardCollection.Count; i++)
             {
                 sb.Append(cardCollection[i].ToString());
