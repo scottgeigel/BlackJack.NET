@@ -21,9 +21,17 @@ namespace Tests
         }
 
         public Action OnReceiveCardCalled { get; set; }
+
+        public CardCollection Hand => throw new NotImplementedException();
+
         public void ReceiveCard(Card c)
         {
             OnReceiveCardCalled();
+        }
+
+        public void NewGame()
+        {
+            throw new NotImplementedException();
         }
     }
 
@@ -42,6 +50,10 @@ namespace Tests
 
         public int ManualScore { get; set; }
         public int ObserveOtherPlayerScore(IPlayer current) => ManualScore;
+
+        public void Stay()
+        {
+        }
     }
 
     public class PlayerStrategyTest

@@ -12,12 +12,13 @@ namespace BlackJack.NET
                 throw new InvalidOperationException("Player is already bust");
             }
             int otherScore = game.ObserveOtherPlayerScore(player);
-            if (otherScore <= StayingScore)
+            if (player.Score < StayingScore && player.Score < otherScore)
             {
-                if (player.Score < otherScore)
-                {
-                    player.ReceiveCard(game.Hit());
-                }
+                player.ReceiveCard(game.Hit());
+            }
+            else
+            {
+                game.Stay();
             }
         }
     }

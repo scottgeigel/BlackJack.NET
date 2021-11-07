@@ -11,8 +11,15 @@ namespace BlackJack.NET
 
         protected IPlayer dealer = new Player(new DealerStrategy());
         protected IPlayer player = new Player(new PlayerStrategy());
+        private bool stay;
         private Shoe deck = new Shoe();
+        public List<IGameListener> gameListeners = new List<IGameListener>();
 
+        public GameController()
+        {
+            gameListeners.Add(player);
+            gameListeners.Add(dealer);
+        }
         public Card Hit()
         {
             return deck.Next();
@@ -34,45 +41,92 @@ namespace BlackJack.NET
             }
         }
 
+        private void NoftifyGameListeners()
+        {
+            foreach(IGameListener listener in gameListeners)
+            {
+                listener.NewGame();
+            }
+        }
+
         public void Play()
         {
+            const string GAMEOVER_Push = "Result: Push";
+            const string GAMEOVER_Player = "Result: Player wins!";
+            const string GAMEOVER_Dealer = "Result: Dealer wins";
+            Stats stats = new Stats();
+            gameListeners.Add(stats);
+            stats.StartTimer();
             //4 cards minimum to play, though that's a coin toss
             while (deck.Count > 4)
             {
+                NoftifyGameListeners();
                 //deal out the cards.
                 player.ReceiveCard(deck.Next());
                 player.ReceiveCard(deck.Next());
                 dealer.ReceiveCard(deck.Next());
                 dealer.ReceiveCard(deck.Next());
-                
+
                 //let the player play
-                while (! (player.IsBust || player.Strategy.WillStay(player)))
+                stay = false;
+                while (deck.Count > 0 && !(player.IsBust || stay))
                 {
                     player.Play(this);
                 }
 
-                //let the dealer play
-                while (!(dealer.IsBust || dealer.Strategy.WillStay(player)))
+                if (!player.IsBust)
                 {
-                    dealer.Play(this);
+                    //let the dealer play
+                    stay = false;
+                    while (deck.Count > 0 && !(dealer.IsBust || stay))
+                    {
+                        dealer.Play(this);
+                    }
                 }
 
                 int playerScore = player.Score;
                 int dealerScore = dealer.Score;
 
-                if (playerScore == dealerScore)
+                Console.Out.WriteLine($"Player hand: {player.Hand} = {playerScore}");
+                Console.Out.WriteLine($"Dealer hand: {dealer.Hand} = {dealerScore}");
+
+                string result;
+                if (player.IsBust)
                 {
-                    Console.Out.WriteLine("Result: Push");
-                } 
+                    //dealer wins. dealer will not play if player busted themselves
+                    result = GAMEOVER_Dealer;
+                    stats.PlayerWon(playerScore);
+                }
+                else if (dealer.IsBust)
+                {
+                    //player wins. dealer can only go bust if the player didn't
+                    result = GAMEOVER_Player;
+                }
+                else if (playerScore == dealerScore)
+                {
+                    //neither are bust but tied
+                    result = GAMEOVER_Push;
+                }
                 else if (playerScore > dealerScore)
                 {
-                    Console.Out.WriteLine("Result: Player wins!");
+                    //neither are bust and player score is higher
+                    result = GAMEOVER_Player;
+                    stats.PlayerWon(playerScore);
                 }
                 else
                 {
-                    Console.Out.WriteLine("Result: Dealer wins");
+                    //neither are bust and player score was less
+                    result = GAMEOVER_Dealer;
                 }
+
+                Console.Out.WriteLine(result);
             }
+            stats.PrintStats();
+        }
+
+        public void Stay()
+        {
+            stay = true;
         }
     }
 }

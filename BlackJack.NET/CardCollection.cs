@@ -62,5 +62,19 @@ namespace BlackJack.NET
             }
             return sum;
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            for(int i = 0; i < cardCollection.Count; i++)
+            {
+                sb.Append(cardCollection[i].ToString());
+                if ((i +1 ) < cardCollection.Count)
+                {
+                    sb.Append(", ");
+                }
+            }
+            return sb.ToString();
+        }
     }
 }

@@ -21,6 +21,10 @@ namespace BlackJack.NET
             {
                 player.ReceiveCard(game.Hit());
             }
+            else
+            {
+                game.Stay();
+            }
         }
     }
 }
