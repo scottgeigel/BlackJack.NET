@@ -32,5 +32,7 @@ namespace Tests
             //and there should be 6 copies of those 52 cards
             Assert.All(tally.Values, count => Assert.Equal(6, count));
         }
+
+
     }
 }

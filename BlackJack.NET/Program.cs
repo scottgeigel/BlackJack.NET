@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BlackJack.NET
+﻿namespace BlackJack.NET
 {
     class Program
     {

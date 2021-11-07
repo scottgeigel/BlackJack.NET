@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlackJack.NET
+﻿namespace BlackJack.NET
 {
 
     public class Player : IPlayer, IGameListener

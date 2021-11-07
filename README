@@ -10,6 +10,8 @@ and run on the command line: dotnet BlackJack.NET.dll
 Alternatively you can download visual studio https://visualstudio.microsoft.com/
 and set it up with the .NET 5 SDK to compile and run the software.
 
+Tests can be run either in Visual Studio or by dotnet test Tests.dll
+
 Assumptions:
 Normally the Dealer would have one card up and the other down. Though the player hits until 16 or higher. The Dealer is the only one that needs to observe the other's hand. And by that point the player has stayed/bust already.
 
