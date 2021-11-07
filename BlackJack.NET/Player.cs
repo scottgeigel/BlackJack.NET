@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 namespace BlackJack.NET
 {
 
-    public class Player
+    public class Player : IPlayer
     {
         private CardCollection hand = new CardCollection();
         private IPlayerStrategy strategy;
         public int Score => hand.Sum();
 
-        public bool IsBust => hand.Sum() > 21;
-
         public bool WillStay => hand.Sum() >= StayingScore;
 
         public int StayingScore => strategy.StayingScore;
+
+        public IPlayerStrategy Strategy => strategy;
+
         public Player(IPlayerStrategy strategy)
         {
             this.strategy = strategy;
@@ -26,7 +27,5 @@ namespace BlackJack.NET
         {
             hand.AddCard(c);
         }
-
-        public void Play(IGameController game) => strategy.Play(this, game);
     }
 }

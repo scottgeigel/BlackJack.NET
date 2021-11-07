@@ -5,7 +5,13 @@ namespace BlackJack.NET
     public class PlayerStrategy : IPlayerStrategy
     {
         public int StayingScore => 16;
-        public void Play(Player player, IGameController game)
+
+        public bool WillStay(IPlayer player)
+        {
+            return player.Score >= StayingScore;
+        }
+
+        public void Play(IPlayer player, IGameController game)
         {
             if (player.IsBust)
             {

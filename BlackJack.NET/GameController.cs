@@ -9,8 +9,8 @@ namespace BlackJack.NET
     class GameController : IGameController
     {
 
-        protected Player dealer = new Player(new DealerStrategy());
-        protected Player player = new Player(new PlayerStrategy());
+        protected IPlayer dealer = new Player(new DealerStrategy());
+        protected IPlayer player = new Player(new PlayerStrategy());
         private Shoe deck = new Shoe();
 
         public Card Hit()
@@ -18,7 +18,7 @@ namespace BlackJack.NET
             return deck.Next();
         }
 
-        public int ObserveOtherPlayerScore(Player current)
+        public int ObserveOtherPlayerScore(IPlayer current)
         {
             if (dealer == current)
             {
@@ -34,7 +34,6 @@ namespace BlackJack.NET
             }
         }
 
-
         public void Play()
         {
             //4 cards minimum to play, though that's a coin toss
@@ -47,13 +46,13 @@ namespace BlackJack.NET
                 dealer.ReceiveCard(deck.Next());
                 
                 //let the player play
-                while (! (player.IsBust || player.WillStay))
+                while (! (player.IsBust || player.Strategy.WillStay(player)))
                 {
                     player.Play(this);
                 }
 
                 //let the dealer play
-                while (!(dealer.IsBust || dealer.WillStay))
+                while (!(dealer.IsBust || dealer.Strategy.WillStay(player)))
                 {
                     dealer.Play(this);
                 }

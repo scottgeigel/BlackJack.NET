@@ -1,7 +1,11 @@
 ﻿namespace BlackJack.NET
 {
     public interface IPlayerStrategy {
-        void Play(Player player, IGameController game);
+        void Play(IPlayer player, IGameController game);
         public int StayingScore { get; }
+        bool WillStay(IPlayer player)
+        {
+            return player.Score >= StayingScore;
+        }
     }
 }

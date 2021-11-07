@@ -5,7 +5,7 @@ namespace BlackJack.NET
     public class DealerStrategy : IPlayerStrategy
     {
         public int StayingScore => 21;
-        public void Play(Player player, IGameController game)
+        public void Play(IPlayer player, IGameController game)
         {
             if (player.IsBust)
             {

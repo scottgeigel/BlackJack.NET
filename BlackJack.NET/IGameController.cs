@@ -3,6 +3,6 @@
     public interface IGameController
     {
         Card Hit();
-        int ObserveOtherPlayerScore(Player current);
+        int ObserveOtherPlayerScore(IPlayer current);
     }
 }
