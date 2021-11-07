@@ -49,6 +49,20 @@ namespace BlackJack.NET
             }
         }
 
+        private void PlayerPlay(IPlayer currentPlayer)
+        {
+            stay = false;
+            while (deck.Count > 0 && !(currentPlayer.IsBust || stay))
+            {
+                currentPlayer.Play(this);
+            }
+        }
+
+        private void HandleEndGame()
+        {
+
+        }
+
         public void Play()
         {
             const string GAMEOVER_Push = "Result: Push";
@@ -68,20 +82,11 @@ namespace BlackJack.NET
                 dealer.ReceiveCard(deck.Next());
 
                 //let the player play
-                stay = false;
-                while (deck.Count > 0 && !(player.IsBust || stay))
-                {
-                    player.Play(this);
-                }
+                PlayerPlay(player);
 
                 if (!player.IsBust)
                 {
-                    //let the dealer play
-                    stay = false;
-                    while (deck.Count > 0 && !(dealer.IsBust || stay))
-                    {
-                        dealer.Play(this);
-                    }
+                    PlayerPlay(dealer);
                 }
 
                 int playerScore = player.Score;
@@ -95,12 +100,12 @@ namespace BlackJack.NET
                 {
                     //dealer wins. dealer will not play if player busted themselves
                     result = GAMEOVER_Dealer;
-                    stats.PlayerWon(playerScore);
                 }
                 else if (dealer.IsBust)
                 {
                     //player wins. dealer can only go bust if the player didn't
                     result = GAMEOVER_Player;
+                    stats.PlayerWon(playerScore);
                 }
                 else if (playerScore == dealerScore)
                 {
@@ -120,8 +125,10 @@ namespace BlackJack.NET
                 }
 
                 Console.Out.WriteLine(result);
+                Console.Out.WriteLine();
             }
             stats.PrintStats();
+            Console.Out.WriteLine();
         }
 
         public void Stay()
