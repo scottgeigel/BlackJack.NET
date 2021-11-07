@@ -96,32 +96,21 @@ namespace BlackJack.NET
                 Console.Out.WriteLine($"Dealer hand: {dealer.Hand} = {dealerScore}");
 
                 string result;
-                if (player.IsBust)
+                if (player.IsBust || (!dealer.IsBust && playerScore < dealerScore))
                 {
                     //dealer wins. dealer will not play if player busted themselves
                     result = GAMEOVER_Dealer;
                 }
-                else if (dealer.IsBust)
+                else if (dealer.IsBust || (!player.IsBust && playerScore > dealerScore))
                 {
                     //player wins. dealer can only go bust if the player didn't
                     result = GAMEOVER_Player;
                     stats.PlayerWon(playerScore);
                 }
-                else if (playerScore == dealerScore)
+                else
                 {
                     //neither are bust but tied
                     result = GAMEOVER_Push;
-                }
-                else if (playerScore > dealerScore)
-                {
-                    //neither are bust and player score is higher
-                    result = GAMEOVER_Player;
-                    stats.PlayerWon(playerScore);
-                }
-                else
-                {
-                    //neither are bust and player score was less
-                    result = GAMEOVER_Dealer;
                 }
 
                 Console.Out.WriteLine(result);
